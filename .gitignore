@@ -4,8 +4,9 @@ wr_frontend/node_modules
 wr_server_front/node_modules
 node_modules
 
-# ここからフロントエンド側
+dist
 
+# ここからフロントエンド側
 wr_frontend/.DS_Store
 wr_frontend/dist
 # local env files
@@ -33,4 +34,4 @@ wr_server_front/dist/**
 wr_server_front/src/components/private.ts
 wr_server_front/src/private/db.json
 wr_server_front/src/private/storage.json
-wr_server_front/src/dist
+wr_server_front/src/dist/**

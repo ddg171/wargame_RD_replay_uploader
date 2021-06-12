@@ -1,7 +1,7 @@
 {
-  "name": "wargame_red_dragon_replay_uploader",
+  "name": "wargame_red_dragon_replay_uploader_server_front",
   "version": "1.0.0",
-  "description": "",
+  "description": "GAE frontend instance of Wargame RD: replay uploader",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,9 +11,9 @@
     "build": "npm-run-all clean tsc copy:static copy:private",
     "gcp-build": "npm-run-all build",
     "deploy": "gcloud app deploy",
-    "copy:static": "cp ./src/dist/ ./dist/ -r",
-    "copy:private": "cp ./src/private/ ./dist/ -r",
-    "start": "node ./dist/index.js"
+    "copy:static": "cp ./src/dist/ ../dist/ -r",
+    "copy:private": "cp ./src/private/ ../dist/ -r",
+    "start": "node ../dist/index.js"
   },
   "keywords": [],
   "author": "hata_kaze",
