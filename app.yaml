@@ -7,7 +7,7 @@ automatic_scaling:
 
 handlers:
   - url: /static
-    static_dir: dist/static
+    static_dir: wr_server_front/dist/static
 
   - url: /.*
     secure: always
