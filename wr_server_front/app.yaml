@@ -1,0 +1,22 @@
+runtime: nodejs12
+instance_class: F1
+automatic_scaling:
+  max_instances: 2
+  min_instances: 0
+
+
+handlers:
+  - url: /static
+    static_dir: dist/static
+
+  - url: /.*
+    secure: always
+    redirect_http_response_code: 301
+    script: auto
+env_variables:
+  HOST: '0.0.0.0'
+  PORT: '8080'
+  NODE_ENV: 'production'
+  BUCKET_NAME: 'replay-data-bucket'
+  COLLECTION_NAME: 'replay'
+

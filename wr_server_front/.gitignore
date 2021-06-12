@@ -1,0 +1,7 @@
+node_modules/
+typescript_webpack_init.sh
+dist/**
+src/components/private.ts
+src/private/db.json
+src/private/storage.json
+src/dist

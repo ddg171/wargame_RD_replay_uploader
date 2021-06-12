@@ -1,0 +1,17 @@
+[
+  {
+    "origin": [
+      "https://wargamereplay.dt.r.appspot.com",
+      "https://wargamerts-tool.com"
+    ],
+    "responseHeader": [
+      "Content-Type"
+    ],
+    "method": [
+      "GET",
+      "HEAD",
+      "DELETE"
+    ],
+    "maxAgeSeconds": 3600
+  }
+]
