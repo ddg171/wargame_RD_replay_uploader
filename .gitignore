@@ -1,0 +1,35 @@
+# nodeモジュール
+# 念の為別個に指定
+wr_frontend/node_modules
+wr_server_front/node_modules
+
+# ここからフロントエンド側
+
+wr_frontend/.DS_Store
+wr_frontend/dist
+# local env files
+wr_frontend/.env.development
+wr_frontend/.env.*.local
+
+# Log files
+wr_frontend/npm-debug.log*
+wr_frontend/yarn-debug.log*
+wr_frontend/yarn-error.log*
+wr_frontend/pnpm-debug.log*
+
+# Editor directories and files
+.idea
+.vscode
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# ここからサーバー
+wr_server_front/typescript_webpack_init.sh
+wr_server_front/dist/**
+wr_server_front/src/components/private.ts
+wr_server_front/src/private/db.json
+wr_server_front/src/private/storage.json
+wr_server_front/src/dist
