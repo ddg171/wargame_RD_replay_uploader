@@ -16,6 +16,7 @@ export type WargamePlayer = {
     PlayerIncomeRate: number | null
 }
 
+
 export type PlayerList = WargamePlayer[]
 
 export type GameInfo = {
