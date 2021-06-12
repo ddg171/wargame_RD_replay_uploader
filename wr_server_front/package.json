@@ -1,5 +1,5 @@
 {
-  "name": "image_uploader",
+  "name": "wargame_red_dragon_replay_uploader",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,13 +9,14 @@
     "clean": "rimraf dist/*.js",
     "tsc": "tsc",
     "build": "npm-run-all clean tsc copy:static copy:private",
-    "gcp-build": "npm-run-all clean tsc copy:static copy:private",
+    "gcp-build": "npm-run-all build",
+    "deploy": "gcloud app deploy",
     "copy:static": "cp ./src/dist/ ./dist/ -r",
     "copy:private": "cp ./src/private/ ./dist/ -r",
     "start": "node ./dist/index.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "hata_kaze",
   "license": "ISC",
   "devDependencies": {
     "@types/cors": "^2.8.10",
