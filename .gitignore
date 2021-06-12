@@ -2,6 +2,7 @@
 # 念の為別個に指定
 wr_frontend/node_modules
 wr_server_front/node_modules
+node_modules
 
 # ここからフロントエンド側
 
