@@ -6,13 +6,14 @@ import apiRouter from './router/api/index'
 
 const app: express.Express = express()
 
-const corsOptions = {
-    origin: 'http://localhost:8080',
-    optionsSuccessStatus: 200
-}
+
 
 
 if (process.env.mode !== "production") {
+    const corsOptions = {
+        origin: 'http://localhost:8080',
+        optionsSuccessStatus: 200
+    }
     app.use(cors(corsOptions))
 }
 app.use(express.json())
