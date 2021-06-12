@@ -15,7 +15,7 @@
     "build": "npm-run-all clean build:front build:server",
     "clean": "rimraf ./dist/*",
     "gcp-build": "npm-run-all build",
-    "start": "node ./dist/index.js"
+    "start": "npm --prefix ./wr_server_front run start"
   },
   "author": "hata_kaze",
   "license": "ISC",
