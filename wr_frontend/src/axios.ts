@@ -31,7 +31,10 @@ export async function detail(id: string): Promise<any> {
 
 export async function list(
   limit = 10,
-  start: Date | undefined = undefined
+  start: Date | null = null,
+  version: string | null = null,
+  gameMode: string | null = null,
+  victoryCondition: string | null = null
 ): Promise<any[]> {
   const query: FormData = new URLSearchParams();
   if (typeof limit !== "number" || limit <= 0) {
@@ -43,6 +46,16 @@ export async function list(
   }
   if (start && isDate(start)) {
     query.append("start", formatISO(start));
+  }
+  // add query
+  if (version) {
+    query.append('version', version)
+  }
+  if (gameMode) {
+    query.append('gameMode', gameMode)
+  }
+  if (victoryCondition) {
+    query.append('victoryCondition', victoryCondition)
   }
 
   return await api

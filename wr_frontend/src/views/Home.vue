@@ -102,6 +102,9 @@ type LocalData = {
   loadDisabled: boolean;
   overlay: boolean;
   replays: any[];
+  version:string|null
+  gameMode:string|null
+  victoryCondition:string|null
 };
 
 export default Vue.extend({
@@ -118,6 +121,9 @@ export default Vue.extend({
       loadDisabled: true,
       overlay: false,
       replays: [],
+      version:null,
+      gameMode:null,
+      victoryCondition:null
     };
   },
   computed: {
@@ -169,9 +175,9 @@ export default Vue.extend({
           this.$emit("error");
         });
     },
-    async getReplaylist(limit = 10, start: Date | undefined = undefined) {
+    async getReplaylist(limit = 10, start: Date | undefined = undefined,version:string|null=null,gameMode:string|null=null,victoryCondition: string | null = null) {
       this.loadDisabled = true;
-      await list(limit, start)
+      await list(limit, start,version,gameMode,victoryCondition)
         .then((replayList: any[]) => {
           if (replayList.length === 0) {
             this.isEnd = true;
