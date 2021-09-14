@@ -28,13 +28,27 @@ export async function getReplay(id: string): Promise<Firestore.DocumentSnapshot>
 }
 
 // ドキュメントの複数取得
-export async function getReplayList(limit: number = 10, startDate: Date | undefined = undefined) {
+export async function getReplayList(
+    limit: number = 10,
+    startDate: Date | undefined = undefined,
+    gameMode: number | undefined = undefined,
+    victoryCondition: string | undefined = undefined,
+    version: string | undefined = undefined) {
     const replayListRefTemp = replaysRef.orderBy('createdDate', "desc").limit(limit || 30)
     // Date型だがinvalid dateな場合はエラーを投げる。
     if (isDate(startDate) && !isValid(startDate)) {
         throw Error("invalid date")
     }
-    const replayListRefPagaNation = startDate ? replayListRefTemp.startAt(startDate) : replayListRefTemp
+    let replayListRefPagaNation = startDate ? replayListRefTemp.startAt(startDate) : replayListRefTemp
+    if (gameMode) {
+        replayListRefPagaNation = replayListRefPagaNation.where("game.GameMode", "==", gameMode)
+    }
+    if (victoryCondition) {
+        replayListRefPagaNation = replayListRefPagaNation.where("game.VictoryCond", "==", victoryCondition)
+    }
+    if (version) {
+        replayListRefPagaNation = replayListRefPagaNation.where("game.Version", "==", version)
+    }
     return await replayListRefPagaNation.get()
 }
 
