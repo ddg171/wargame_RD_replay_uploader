@@ -150,7 +150,6 @@ export function changeBinaryStr(deck: string): string | null {
 }
 
 function nationCode(bin:string|undefined,version=0):string|undefined{
-  console.log(version)
   if(!bin) return undefined
   if(isNaN(version)) return undefined
   if(bin === "000111101100" &&  version< initialSADFVersion) return "NATO" 
@@ -167,6 +166,5 @@ export function decodeDeck(deck: string,version:number): DeckInfo | null {
   const eraCode: string = binDeck.substr(15, 2);
   const era: string | undefined = eraMap[parseInt(eraCode, 2).toString()];
   const result =  { side, nation, spec, era }
-  console.log(deck,result ,binDeck.substr(0, 12))
   return result;
 }

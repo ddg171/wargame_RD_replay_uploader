@@ -400,7 +400,7 @@ export default Vue.extend({
           navigator.clipboard.writeText(str);
           this.$emit("copy", "url copied.");
         } catch (error) {
-          console.log(error);
+          // console.log(error);
           this.$emit("error");
         }
       }
