@@ -5,6 +5,8 @@ export type DeckInfo = {
   era: string | undefined;
 };
 
+const initialSADFVersion= 58710
+
 const strMap: { [S: string]: string } = {
   A: "000000",
   B: "000001",
@@ -100,7 +102,7 @@ const nationMap: { [N: string]: string } = {
   "000111100110": "LJUT",
   "000111101000": "NORAD",
   "000111101001": "BDRNL",
-  "000111101100": "NATO",
+  "000111101100": "SADF",
   "010000001100": "DDR",
   "010000101100": "USSR",
   "010001001100": "POL",
@@ -114,6 +116,7 @@ const nationMap: { [N: string]: string } = {
   "010100101010": "FINPL",
   "010100101011": "YUCZE",
   "010100101100": "REDFOR",
+  "001000001100":"NATO"
 };
 
 const specMap: { [N: string]: string } = {
@@ -146,14 +149,24 @@ export function changeBinaryStr(deck: string): string | null {
   return binSplitted.join("");
 }
 
-export function decodeDeck(deck: string): DeckInfo | null {
+function nationCode(bin:string|undefined,version=0):string|undefined{
+  console.log(version)
+  if(!bin) return undefined
+  if(isNaN(version)) return undefined
+  if(bin === "000111101100" &&  version< initialSADFVersion) return "NATO" 
+  return nationMap[bin];
+}
+
+export function decodeDeck(deck: string,version:number): DeckInfo | null {
   const binDeck: string | null = changeBinaryStr(deck);
   if (!binDeck) return null;
   const side: string | undefined = sideMap[binDeck.charAt(1)];
-  const nation: string | undefined = nationMap[binDeck.substr(0, 12)];
+  const nation: string | undefined = nationCode(binDeck.substr(0, 12),version)
   const specCode: string = binDeck.substr(12, 3);
   const spec: string | undefined = specMap[parseInt(specCode, 2).toString()];
   const eraCode: string = binDeck.substr(15, 2);
   const era: string | undefined = eraMap[parseInt(eraCode, 2).toString()];
-  return { side, nation, spec, era };
+  const result =  { side, nation, spec, era }
+  console.log(deck,result ,binDeck.substr(0, 12))
+  return result;
 }
