@@ -16,19 +16,19 @@
         <template v-if="!!deck">
           <small>
             <b>
-              {{ decode(deck).nation || "NONE" }}
+              {{ decoded.nation || "NONE" }}
             </b>
             /</small
           >
           <small>
             <b>
-              {{ decode(deck).spec || "NONE" }}
+              {{ decoded.spec || "NONE" }}
             </b>
             /</small
           >
           <small>
             <b>
-              {{ era(decode(deck).era) || "NONE" }}
+              {{ era(decoded.era) || "NONE" }}
             </b>
           </small>
         </template>
@@ -61,6 +61,18 @@ export default Vue.extend({
         return "n/a";
       },
     },
+    versionStr:{
+      type:String,
+      default:()=>''
+    }
+  },
+  computed:{
+    decoded():DeckInfo | null{
+      return this.decode(this.deck,this.version)
+    },
+    version():number{
+      return parseInt(this.versionStr)
+    }
   },
   methods: {
     copy(str: string): void {
@@ -74,8 +86,8 @@ export default Vue.extend({
         }
       }
     },
-    decode(deck: string): DeckInfo | null {
-      return decodeDeck(deck);
+    decode(deck: string,version:number): DeckInfo | null {
+      return decodeDeck(deck,version);
     },
     era(cat: string): string {
       const eraMap: { [T: string]: string } = {
