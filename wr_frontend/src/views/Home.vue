@@ -39,7 +39,7 @@
         </v-col>
       </v-row>
       <v-row justify="center">
-        <v-col cols="12" md="10" xl="8"  v-for="r in replays" :key="r.id">
+        <v-col class="card-wrapper" cols="12" md="10" xl="8"  v-for="r in replays" :key="r.id">
           <replay-card
             :replay="r"
             @error="showSnackbar"
@@ -191,3 +191,10 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style scoped>
+ .card-wrapper{
+   padding-bottom: 0px;
+   padding-top: 7px;
+ }
+</style>

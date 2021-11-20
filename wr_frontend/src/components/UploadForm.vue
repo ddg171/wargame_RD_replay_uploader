@@ -1,7 +1,7 @@
 <template>
   <div
-    @dragover.prevent="() => false"
-    @dragleave.prevent="() => false"
+    @dragover.prevent="overlay=true"
+    @dragleave.prevent="overlay=false"
     @drop.prevent="drop"
   >
     <v-form ref="form" class="m-2" @submit.prevent="submit" v-model="valid">
@@ -38,7 +38,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import axios from "@/axios";
+import axios from "../axios";
 
 interface VForm {
   validate: () => boolean;
@@ -55,6 +55,7 @@ type LocalData = {
   deletePin: string;
   maxFileSize: number;
   valid: boolean;
+  overlay:boolean
   commentRule: V[];
   deletePinRule: V[];
   fileRule: V[];
@@ -71,6 +72,7 @@ export default Vue.extend({
       deletePin: "",
       maxFileSize,
       valid: false,
+      overlay:false,
       commentRule: [
         (v) =>
           !v ||
@@ -99,6 +101,7 @@ export default Vue.extend({
       return this.$refs.form as any;
     },
     drop(e: any): void {
+      this.overlay=false
       const newFiles: any = e?.dataTransfer?.files;
       if (newFiles && newFiles.length > 0) {
         this.file = null;

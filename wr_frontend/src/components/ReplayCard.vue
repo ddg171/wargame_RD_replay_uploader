@@ -230,7 +230,7 @@
       <p class="d-inline-block">{{ replay.comment }}</p>
     </v-card-text>
     <v-expand-transition>
-      <v-row v-show="show">
+      <v-row v-show="show" class="mb-1">
         <v-col cols="12">
           <v-divider></v-divider>
           <delete-form
@@ -246,9 +246,9 @@
 
 <script lang="ts">
 import Vue from "vue";
-import DeleteForm from "@/components/DeleteForm.vue";
-import Player from "@/components/Player.vue";
-import formatter, { mapNameTrim } from "@/formatter";
+import DeleteForm from "./DeleteForm.vue";
+import Player from "./Player.vue";
+import formatter, { mapNameTrim } from "../formatter";
 import parseISO from "date-fns/parseISO/index";
 import { format, isDate, isValid } from "date-fns";
 import { getURL } from "@/axios";
