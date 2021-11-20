@@ -38,17 +38,14 @@
           <v-divider />
         </v-col>
       </v-row>
-      <v-row justify="center" v-for="(r, i) in replays" :key="r.id">
-        <v-col cols="12" md="10" xl="8">
+      <v-row justify="center">
+        <v-col class="card-wrapper" cols="12" md="10" xl="8"  v-for="r in replays" :key="r.id">
           <replay-card
             :replay="r"
             @error="showSnackbar"
             @copy="showSnackbar"
             @delete="remove(r.id)"
           ></replay-card>
-        </v-col>
-        <v-col v-if="i > 0 && i % 10 === 0" cols="12" md="10" xl="8">
-          <v-card></v-card>
         </v-col>
       </v-row>
       <v-row justify="center">
@@ -83,9 +80,10 @@
 </template>
 
 <script lang="ts">
-import UploadForm from "@/components/UploadForm.vue";
-import ReplayCard from "@/components/ReplayCard.vue";
-import { detail, list } from "@/axios";
+import UploadForm from "../components/UploadForm.vue";
+import ReplayCard from "../components/ReplayCard.vue";
+import { detail, list } from "../axios";
+import{ debugLog} from '../util/debug'
 
 import Vue from "vue";
 import { parseISO } from "date-fns";
@@ -145,7 +143,7 @@ export default Vue.extend({
     uploaded(payload: UploadResult): void {
       const id: string = payload.id;
       const pin: string = payload.pin;
-      // console.log(id, pin);
+      debugLog(id, pin);
       if (id) {
         this.getReplay(id);
       }
@@ -161,11 +159,11 @@ export default Vue.extend({
     getReplay(id: string) {
       detail(id.toString())
         .then((replay) => {
-          // console.log(replay);
+          debugLog(replay);
           this.replays.unshift(replay);
         })
         .catch((e) => {
-          // console.log(e);
+          debugLog(e);
           this.$emit("error");
         });
     },
@@ -183,7 +181,7 @@ export default Vue.extend({
           this.loadDisabled = false;
         })
         .catch((e: any) => {
-          // console.log(e);
+          debugLog(e);
         });
     },
 
@@ -194,3 +192,10 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style scoped>
+ .card-wrapper{
+   padding-bottom: 0px;
+   padding-top: 7px;
+ }
+</style>

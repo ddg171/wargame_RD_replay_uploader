@@ -46,7 +46,7 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { decodeDeck, DeckInfo } from "@/deckDecoder";
+import { decodeDeck, DeckInfo } from "../deckDecoder";
 export default Vue.extend({
   props: {
     deck: {

@@ -1,3 +1,5 @@
+import {debugLog} from "./util/debug"
+
 export type DeckInfo = {
   side: string | undefined;
   nation: string | undefined;
@@ -117,7 +119,9 @@ const nationMap: { [N: string]: string } = {
   "010100101010": "FINPL",
   "010100101011": "YUCZE",
   "010100101100": "REDFOR",
-  "001000001100":"NATO"
+  "001000001100":"NATO",
+  "001000001001":"BDRNL",
+  "001000000011":"BD"
 };
 
 const specMap: { [N: string]: string } = {
@@ -160,7 +164,6 @@ function nationCode(bin:string|undefined,version=0):string|undefined{
 export function decodeDeck(deck: string,version:number): DeckInfo | null {
   const binDeck: string | null = changeBinaryStr(deck);
   if (!binDeck) return null;
-  console.log(binDeck.substr(0, 12),version)
   const side: string | undefined = sideMap[binDeck.charAt(1)];
   const nation: string | undefined = nationCode(binDeck.substr(0, 12),version)
   const specCode: string = binDeck.substr(12, 3);
@@ -168,5 +171,6 @@ export function decodeDeck(deck: string,version:number): DeckInfo | null {
   const eraCode: string = binDeck.substr(15, 2);
   const era: string | undefined = eraMap[parseInt(eraCode, 2).toString()];
   const result =  { side, nation, spec, era }
+  debugLog(result)
   return result;
 }

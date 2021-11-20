@@ -230,7 +230,7 @@
       <p class="d-inline-block">{{ replay.comment }}</p>
     </v-card-text>
     <v-expand-transition>
-      <v-row v-show="show">
+      <v-row v-show="show" class="mb-1">
         <v-col cols="12">
           <v-divider></v-divider>
           <delete-form
@@ -246,12 +246,13 @@
 
 <script lang="ts">
 import Vue from "vue";
-import DeleteForm from "@/components/DeleteForm.vue";
-import Player from "@/components/Player.vue";
-import formatter, { mapNameTrim } from "@/formatter";
+import DeleteForm from "./DeleteForm.vue";
+import Player from "./Player.vue";
+import formatter, { mapNameTrim } from "../formatter";
 import parseISO from "date-fns/parseISO/index";
 import { format, isDate, isValid } from "date-fns";
-import { getURL } from "@/axios";
+import { getURL } from "../axios";
+import{ debugLog} from '../util/debug'
 
 type LocalData = {
   fileURL: string | null;
@@ -367,7 +368,7 @@ export default Vue.extend({
       this.$gtag.event("download");
       getURL(id)
         .then((res: any) => {
-          // console.log(res);
+          debugLog(res);
           const url: string = res.url;
           return url;
         })
@@ -381,8 +382,8 @@ export default Vue.extend({
         .then(() => {
           this.fileURL = null;
         })
-        .catch(() => {
-          // console.log(e);
+        .catch((e) => {
+          debugLog(e);
           this.$emit("error");
           this.fileURL = null;
         });
@@ -400,7 +401,7 @@ export default Vue.extend({
           navigator.clipboard.writeText(str);
           this.$emit("copy", "url copied.");
         } catch (error) {
-          // console.log(error);
+          debugLog(error);
           this.$emit("error");
         }
       }
