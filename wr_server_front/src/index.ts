@@ -1,5 +1,5 @@
 import express from "express";
-import cors from 'cors'
+
 import helmet from 'helmet'
 
 import apiRouter from './router/api/index'
@@ -9,13 +9,6 @@ const app: express.Express = express()
 
 
 
-if (process.env.mode !== "production") {
-    const corsOptions = {
-        origin: 'http://localhost:8080',
-        optionsSuccessStatus: 200
-    }
-    app.use(cors(corsOptions))
-}
 app.use(express.json())
 app.use(express.urlencoded({ extended: true }))
 app.use(helmet({
