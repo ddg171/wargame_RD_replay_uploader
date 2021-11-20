@@ -38,17 +38,14 @@
           <v-divider />
         </v-col>
       </v-row>
-      <v-row justify="center" v-for="(r, i) in replays" :key="r.id">
-        <v-col cols="12" md="10" xl="8">
+      <v-row justify="center">
+        <v-col cols="12" md="10" xl="8"  v-for="r in replays" :key="r.id">
           <replay-card
             :replay="r"
             @error="showSnackbar"
             @copy="showSnackbar"
             @delete="remove(r.id)"
           ></replay-card>
-        </v-col>
-        <v-col v-if="i > 0 && i % 10 === 0" cols="12" md="10" xl="8">
-          <v-card></v-card>
         </v-col>
       </v-row>
       <v-row justify="center">
@@ -83,9 +80,9 @@
 </template>
 
 <script lang="ts">
-import UploadForm from "@/components/UploadForm.vue";
-import ReplayCard from "@/components/ReplayCard.vue";
-import { detail, list } from "@/axios";
+import UploadForm from "../components/UploadForm.vue";
+import ReplayCard from "../components/ReplayCard.vue";
+import { detail, list } from "../axios";
 
 import Vue from "vue";
 import { parseISO } from "date-fns";
