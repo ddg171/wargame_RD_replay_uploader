@@ -117,7 +117,9 @@ const nationMap: { [N: string]: string } = {
   "010100101010": "FINPL",
   "010100101011": "YUCZE",
   "010100101100": "REDFOR",
-  "001000001100":"NATO"
+  "001000001100":"NATO",
+  "001000001001":"BDRNL",
+  "001000000011":"BD"
 };
 
 const specMap: { [N: string]: string } = {
@@ -160,7 +162,6 @@ function nationCode(bin:string|undefined,version=0):string|undefined{
 export function decodeDeck(deck: string,version:number): DeckInfo | null {
   const binDeck: string | null = changeBinaryStr(deck);
   if (!binDeck) return null;
-  console.log(binDeck.substr(0, 12),version)
   const side: string | undefined = sideMap[binDeck.charAt(1)];
   const nation: string | undefined = nationCode(binDeck.substr(0, 12),version)
   const specCode: string = binDeck.substr(12, 3);
