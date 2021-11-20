@@ -123,7 +123,7 @@ export default Vue.extend({
       axios
         .post("/replay/upload", payload, { headers })
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           const data = res.data;
           const id = data?.id;
           const pin = data?.pin;

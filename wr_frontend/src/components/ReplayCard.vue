@@ -194,6 +194,7 @@
                       v-for="b in team1"
                       :deck="b.PlayerDeckContent"
                       :player-name="b.PlayerName"
+                      :version-str="replay.game.Version"
                       :key="`${replay.id}-${b.key}`"
                       @copy="$emit('copy', 'deck copied.')"
                       @error="$emit('error')"
@@ -211,6 +212,7 @@
                       v-for="r in team2"
                       :deck="r.PlayerDeckContent"
                       :player-name="r.PlayerName"
+                      :version-str="replay.game.Version"
                       :key="`${replay.id}-${r.key}`"
                       @copy="$emit('copy', 'deck copied.')"
                       @error="$emit('error')"
@@ -398,7 +400,7 @@ export default Vue.extend({
           navigator.clipboard.writeText(str);
           this.$emit("copy", "url copied.");
         } catch (error) {
-          console.log(error);
+          // console.log(error);
           this.$emit("error");
         }
       }
