@@ -1,10 +1,9 @@
 import axios from "axios";
 import { formatISO, isDate } from "date-fns";
-const API_URL = process.env.VUE_APP_API_URL;
-// console.log(API_URL)
+
 
 const api = axios.create({
-  baseURL: API_URL,
+  baseURL:"/api/v1",
 });
 
 export default api;
