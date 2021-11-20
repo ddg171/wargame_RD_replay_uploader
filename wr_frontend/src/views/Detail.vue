@@ -18,8 +18,10 @@
 </template>
 
 <script lang="ts">
-import ReplayCard from "@/components/ReplayCard.vue";
-import { detail } from "@/axios";
+import ReplayCard from "../components/ReplayCard.vue";
+import { detail } from "../axios";
+import{ debugLog} from '../util/debug'
+
 
 import Vue from "vue";
 // import parseISO from "date-fns/parseISO/index";
@@ -46,11 +48,11 @@ export default Vue.extend({
     getReplay(id: string) {
       detail(id.toString())
         .then((replay) => {
-          // console.log(replay);
+          debugLog(replay);
           this.replay = replay;
         })
         .catch((e) => {
-          // console.log(e);
+          debugLog(e);
           this.$emit("error");
           alert("Replay is not found.");
           this.$router.push("/");

@@ -83,6 +83,7 @@
 import UploadForm from "../components/UploadForm.vue";
 import ReplayCard from "../components/ReplayCard.vue";
 import { detail, list } from "../axios";
+import{ debugLog} from '../util/debug'
 
 import Vue from "vue";
 import { parseISO } from "date-fns";
@@ -142,7 +143,7 @@ export default Vue.extend({
     uploaded(payload: UploadResult): void {
       const id: string = payload.id;
       const pin: string = payload.pin;
-      // console.log(id, pin);
+      debugLog(id, pin);
       if (id) {
         this.getReplay(id);
       }
@@ -158,11 +159,11 @@ export default Vue.extend({
     getReplay(id: string) {
       detail(id.toString())
         .then((replay) => {
-          // console.log(replay);
+          debugLog(replay);
           this.replays.unshift(replay);
         })
         .catch((e) => {
-          // console.log(e);
+          debugLog(e);
           this.$emit("error");
         });
     },
@@ -180,7 +181,7 @@ export default Vue.extend({
           this.loadDisabled = false;
         })
         .catch((e: any) => {
-          // console.log(e);
+          debugLog(e);
         });
     },
 

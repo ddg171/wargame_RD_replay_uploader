@@ -22,7 +22,8 @@
 
 <script lang="ts">
 import Vue from "vue";
-import { deleteReplay } from "@/axios";
+import { deleteReplay } from "../axios";
+import{ debugLog} from '../util/debug'
 
 interface VForm {
   validate: () => boolean;
@@ -67,11 +68,11 @@ export default Vue.extend({
       this.$gtag.event("delete");
       deleteReplay(this.id, this.pin)
         .then((res) => {
-          // console.log(res);
+          debugLog(res);
           this.$emit("delete", res.id);
         })
         .catch((e) => {
-          // console.log(e);
+          debugLog(e);
           this.$emit("error");
           this.pin = "";
         });

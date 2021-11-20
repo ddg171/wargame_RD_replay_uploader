@@ -1,3 +1,5 @@
+import {debugLog} from "./util/debug"
+
 export type DeckInfo = {
   side: string | undefined;
   nation: string | undefined;
@@ -169,5 +171,6 @@ export function decodeDeck(deck: string,version:number): DeckInfo | null {
   const eraCode: string = binDeck.substr(15, 2);
   const era: string | undefined = eraMap[parseInt(eraCode, 2).toString()];
   const result =  { side, nation, spec, era }
+  debugLog(result)
   return result;
 }

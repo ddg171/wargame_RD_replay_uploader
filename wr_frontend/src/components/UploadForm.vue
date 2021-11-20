@@ -39,6 +39,8 @@
 <script lang="ts">
 import Vue from "vue";
 import axios from "../axios";
+import{ debugLog} from '../util/debug'
+
 
 interface VForm {
   validate: () => boolean;
@@ -126,7 +128,7 @@ export default Vue.extend({
       axios
         .post("/replay/upload", payload, { headers })
         .then((res) => {
-          // console.log(res);
+          debugLog(res);
           const data = res.data;
           const id = data?.id;
           const pin = data?.pin;
@@ -135,7 +137,7 @@ export default Vue.extend({
           this.$emit("stop");
         })
         .catch((e) => {
-          // console.log(e);
+          debugLog(e);
           this.$emit("error", "投稿失敗");
           this.$emit("stop");
         });
